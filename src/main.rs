@@ -1,4 +1,3 @@
-use std::path::PathBuf;
 use std::str::FromStr;
 use amethyst::prelude::*;
 use amethyst::window::*;
@@ -95,7 +94,7 @@ fn main() -> amethyst::Result<()> {
     amethyst::start_logger(amethyst::LoggerConfig {
         stdout: amethyst::StdoutLog::Off,
         level_filter: amethyst::LogLevelFilter::Info,
-        log_file: Some(PathBuf::from_str("pong.log")?),
+        log_file: Some(FromStr::from_str("pong.log")?),
         allow_env_override: true,
         log_gfx_device_level: None,
     });
