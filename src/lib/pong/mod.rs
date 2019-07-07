@@ -1,11 +1,6 @@
-pub mod side;
-pub mod arena;
-pub mod paddle;
-pub mod fns;
-
 use amethyst::prelude::*;
-use paddle::*;
-use fns::*;
+use super::paddle::*;
+use super::fns::*;
 
 pub struct Pong;
 

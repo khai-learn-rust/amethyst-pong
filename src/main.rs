@@ -1,17 +1,15 @@
+pub mod lib;
+
 use amethyst::prelude::*;
 use amethyst::window::*;
 use amethyst::renderer;
 use amethyst::assets;
 use amethyst::core;
 use renderer::sprite;
+use lib::pong::Pong;
+use lib::graph::example_graph::ExampleGraph;
 
-mod pong;
-use pong::Pong;
-
-mod graph;
-use graph::example_graph::ExampleGraph;
-
-fn main() -> amethyst::Result<()> {
+pub fn main() -> amethyst::Result<()> {
     let app_root = amethyst::utils::application_root_dir()?;
     let display_config_path = app_root.join("resources").join("display_config.ron");
 
