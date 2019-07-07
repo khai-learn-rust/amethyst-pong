@@ -1,3 +1,5 @@
+use std::path::PathBuf;
+use std::str::FromStr;
 use amethyst::prelude::*;
 use amethyst::window::*;
 use amethyst::renderer;
@@ -90,7 +92,13 @@ impl renderer::GraphCreator<renderer::types::DefaultBackend> for ExampleGraph {
 }
 
 fn main() -> amethyst::Result<()> {
-    amethyst::start_logger(Default::default());
+    amethyst::start_logger(amethyst::LoggerConfig {
+        stdout: amethyst::StdoutLog::Off,
+        level_filter: amethyst::LogLevelFilter::Info,
+        log_file: Some(PathBuf::from_str("pong.log")?),
+        allow_env_override: true,
+        log_gfx_device_level: None,
+    });
 
     let app_root = amethyst::utils::application_root_dir()?;
     let display_config_path = app_root.join("resources").join("display_config.ron");
