@@ -96,7 +96,7 @@ fn main() -> amethyst::Result<()> {
         level_filter: amethyst::LogLevelFilter::Info,
         log_file: Some(FromStr::from_str("pong.log")?),
         allow_env_override: true,
-        log_gfx_device_level: None,
+        log_gfx_device_level: Some(amethyst::LogLevelFilter::Info),
     });
 
     let app_root = amethyst::utils::application_root_dir()?;
