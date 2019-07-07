@@ -1,4 +1,3 @@
-use std::str::FromStr;
 use amethyst::prelude::*;
 use amethyst::window::*;
 use amethyst::renderer;
@@ -12,16 +11,16 @@ mod graph;
 use graph::example_graph::ExampleGraph;
 
 fn main() -> amethyst::Result<()> {
+    let app_root = amethyst::utils::application_root_dir()?;
+    let display_config_path = app_root.join("resources").join("display_config.ron");
+
     amethyst::start_logger(amethyst::LoggerConfig {
         stdout: amethyst::StdoutLog::Off,
         level_filter: amethyst::LogLevelFilter::Info,
-        log_file: Some(FromStr::from_str("pong.log")?),
+        log_file: Some(app_root.join("pong.log")),
         allow_env_override: true,
         log_gfx_device_level: Some(amethyst::LogLevelFilter::Info),
     });
-
-    let app_root = amethyst::utils::application_root_dir()?;
-    let display_config_path = app_root.join("resources").join("display_config.ron");
 
     let game_data = GameDataBuilder::default()
         .with_bundle(WindowBundle::from_config_path(display_config_path))?
