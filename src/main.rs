@@ -2,10 +2,11 @@ use amethyst::prelude::*;
 use amethyst::window::*;
 use amethyst::renderer;
 use amethyst::assets;
+use amethyst::core;
 use renderer::sprite;
 
-mod states;
-use states::pong::Pong;
+mod pong;
+use pong::Pong;
 
 mod graph;
 use graph::example_graph::ExampleGraph;
@@ -24,6 +25,7 @@ fn main() -> amethyst::Result<()> {
 
     let game_data = GameDataBuilder::default()
         .with_bundle(WindowBundle::from_config_path(display_config_path))?
+        .with_bundle(core::transform::TransformBundle::new())?
         .with(
             assets::Processor::<sprite::SpriteSheet>::new(),
             "sprite_sheet_processor",
