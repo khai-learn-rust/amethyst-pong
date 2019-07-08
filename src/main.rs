@@ -56,7 +56,7 @@ pub fn main() -> amethyst::Result<()> {
     let app_root = std::path::PathBuf::from(".");
     let assets_dir = app_root.join("assets/");
 
-    let mut game = Application::new(assets_dir, Pong, game_data)?;
+    let mut game = Application::new(assets_dir, Pong::default(), game_data)?;
     game.run();
 
     Ok(())
