@@ -1,7 +1,9 @@
 pub mod pong;
+pub mod ball;
 pub mod graph;
 pub mod side;
 pub mod arena;
 pub mod paddle;
 pub mod fns;
+pub mod utils;
 pub mod systems;

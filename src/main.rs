@@ -36,6 +36,12 @@ pub fn main() -> amethyst::Result<()> {
             "paddle_system",
             &["input_system"]
         )
+        .with(systems::ball::MoveBallsSystem, "ball_system", &[])
+        .with(
+            systems::bounce::BounceSystem,
+            "collision_system",
+            &["paddle_system", "ball_system"],
+        )
         .with(
             assets::Processor::<sprite::SpriteSheet>::new(),
             "sprite_sheet_processor",

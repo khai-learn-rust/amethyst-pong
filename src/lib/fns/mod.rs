@@ -5,6 +5,7 @@ use amethyst::assets;
 use super::paddle::*;
 use super::arena::*;
 use super::side::*;
+use super::ball::*;
 
 pub fn initialize_camera(world: &mut World) {
     let mut transform = core::Transform::default();
@@ -17,7 +18,7 @@ pub fn initialize_camera(world: &mut World) {
         .build();
 }
 
-pub fn load_sprite_sheet(world: &mut World) -> assets::Handle<renderer::SpriteSheet> {
+pub fn load_sprite_sheet(world: &World) -> assets::Handle<renderer::SpriteSheet> {
     let app_root = amethyst::utils::application_root_dir().unwrap();
 
     let texture_handle = {
@@ -65,4 +66,28 @@ pub fn initialize_paddles(mut world: &mut World, sprite_sheet: assets::Handle<re
 
     create_plank(&mut world, Side::Left, PADDLE_WIDTH * 0.5);
     create_plank(&mut world, Side::Right, ARENA_WIDTH - PADDLE_WIDTH * 0.5);
+}
+
+pub fn initialize_ball(world: &mut World, sprite_sheet_handle: assets::Handle<renderer::SpriteSheet>) {
+    let mut local_transform = core::Transform::default();
+    local_transform.set_translation_xyz(
+        ARENA_WIDTH / 2.0,
+        ARENA_HEIGHT / 2.0,
+        0.0,
+    );
+
+    let sprite_render = renderer::SpriteRender {
+        sprite_sheet: sprite_sheet_handle,
+        sprite_number: 1,
+    };
+
+    world
+        .create_entity()
+        .with(sprite_render)
+        .with(Ball {
+            radius: BALL_RADIUS,
+            velocity: (BALL_VELOCITY_X, BALL_VELOCITY_Y),
+        })
+        .with(local_transform)
+        .build();
 }
