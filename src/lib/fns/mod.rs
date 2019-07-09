@@ -1,11 +1,28 @@
+use std::path::*;
+use std::io::Error;
 use amethyst::core;
 use amethyst::prelude::*;
 use amethyst::renderer;
 use amethyst::assets;
+use amethyst::ui;
 use super::paddle::*;
 use super::arena::*;
 use super::side::*;
 use super::ball::*;
+use super::score::*;
+
+pub fn app_root() -> Result<PathBuf, Error> {
+    amethyst::utils::application_root_dir()
+}
+
+fn get_path(filename: &str) -> Result<String, Option<Error>> {
+    app_root()
+        .map_err(Some)?
+        .join(filename)
+        .to_str()
+        .map(|x| x.to_owned())
+        .ok_or(None)
+}
 
 pub fn initialize_camera(world: &mut World) {
     let mut transform = core::Transform::default();
@@ -19,13 +36,11 @@ pub fn initialize_camera(world: &mut World) {
 }
 
 pub fn load_sprite_sheet(world: &World) -> assets::Handle<renderer::SpriteSheet> {
-    let app_root = amethyst::utils::application_root_dir().unwrap();
-
     let texture_handle = {
         let loader = world.read_resource::<assets::Loader>();
         let texture_storage = world.read_resource::<assets::AssetStorage<renderer::Texture>>();
         loader.load(
-            app_root.join("texture/pong_spritesheet.png").to_str().unwrap(),
+            get_path("assets/texture/pong_spritesheet.png").unwrap(),
             renderer::ImageFormat::default(),
             (),
             &texture_storage
@@ -35,7 +50,7 @@ pub fn load_sprite_sheet(world: &World) -> assets::Handle<renderer::SpriteSheet>
     let loader = world.read_resource::<assets::Loader>();
     let sprite_sheet_store = world.read_resource::<assets::AssetStorage<renderer::SpriteSheet>>();
     loader.load(
-        app_root.join("texture/pong_spritesheet.ron").to_str().unwrap(),
+        get_path("assets/texture/pong_spritesheet.ron").unwrap(),
         renderer::SpriteSheetFormat(texture_handle),
         (),
         &sprite_sheet_store
@@ -90,4 +105,41 @@ pub fn initialize_ball(world: &mut World, sprite_sheet_handle: assets::Handle<re
         })
         .with(local_transform)
         .build();
+}
+
+pub fn initialize_scoreboard(world: &mut World) {
+    let mut create_score = |label: &str, x: f32| {
+        let font = world.read_resource::<assets::Loader>().load(
+            get_path("assets/font/square.ttf").unwrap(),
+            ui::TtfFormat,
+            (),
+            &world.read_resource(),
+        );
+
+        let player_transform = ui::UiTransform::new(
+            label.to_owned(),
+            ui::Anchor::TopMiddle,
+            ui::Anchor::TopMiddle,
+            x,
+            -50.0,
+            -1.0,
+            -200.0,
+            -50.0,
+        );
+
+        world
+            .create_entity()
+            .with(player_transform)
+            .with(ui::UiText::new(
+                font,
+                "0".to_owned(),
+                [1.0, 1.0, 1.0, 1.0],
+                50.0,
+            ))
+            .build()
+    };
+
+    let player1 = create_score("P1", -50.0);
+    let player2 = create_score("P2", 50.0);
+    world.add_resource(ScoreText { player1, player2 });
 }

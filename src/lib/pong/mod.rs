@@ -17,6 +17,7 @@ impl SimpleState for Pong {
         self.sprite_sheet_handle.replace(load_sprite_sheet(world));
         initialize_paddles(world, self.sprite_sheet_handle.clone().unwrap());
         initialize_camera(world);
+        initialize_scoreboard(world);
     }
 
     fn update(&mut self, data: &mut StateData<GameData>) -> SimpleTrans {

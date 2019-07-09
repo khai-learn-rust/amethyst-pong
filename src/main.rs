@@ -6,13 +6,14 @@ use amethyst::renderer;
 use amethyst::assets;
 use amethyst::core;
 use amethyst::input;
+use amethyst::ui;
 use renderer::sprite;
 use lib::pong::Pong;
 use lib::graph::example_graph::ExampleGraph;
 use lib::systems;
 
 pub fn main() -> amethyst::Result<()> {
-    let app_root = amethyst::utils::application_root_dir()?;
+    let app_root = lib::fns::app_root()?;
     let display_config_path = app_root.join("resources").join("display_config.ron");
     let binding_path = app_root.join("resources").join("bindings_config.ron");
 
@@ -31,6 +32,7 @@ pub fn main() -> amethyst::Result<()> {
         .with_bundle(WindowBundle::from_config_path(display_config_path))?
         .with_bundle(core::transform::TransformBundle::new())?
         .with_bundle(input_bundle)?
+        .with_bundle(ui::UiBundle::<renderer::types::DefaultBackend, input::StringBindings>::new())?
         .with(
             systems::paddle::PaddleSystem,
             "paddle_system",
@@ -43,6 +45,11 @@ pub fn main() -> amethyst::Result<()> {
             &["paddle_system", "ball_system"],
         )
         .with(
+            systems::winner::WinnerSystem,
+            "winner_system",
+            &["ball_system"],
+        )
+        .with(
             assets::Processor::<sprite::SpriteSheet>::new(),
             "sprite_sheet_processor",
             &[],
@@ -53,7 +60,6 @@ pub fn main() -> amethyst::Result<()> {
             ),
         );
 
-    let app_root = std::path::PathBuf::from(".");
     let assets_dir = app_root.join("assets/");
 
     let mut game = Application::new(assets_dir, Pong::default(), game_data)?;
