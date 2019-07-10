@@ -68,7 +68,6 @@ impl renderer::GraphCreator<renderer::types::DefaultBackend> for ExampleGraph {
 
         let pass = graph_builder.add_node(
             renderer::SubpassBuilder::new()
-                .with_group(RenderGroupDesc::builder(renderer::pass::DrawFlat2DDesc::new()))
                 .with_group(renderer::pass::DrawFlat2DDesc::default().builder())
                 .with_group(ui::DrawUiDesc::default().builder())
                 .with_color(color)
