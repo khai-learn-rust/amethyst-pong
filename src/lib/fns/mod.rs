@@ -6,10 +6,10 @@ use amethyst::renderer;
 use amethyst::assets;
 use amethyst::ui;
 use crate::lib::components::paddle::*;
-use crate::lib::arena::*;
-use crate::lib::side::*;
+use crate::lib::data::arena::*;
+use crate::lib::data::side::*;
+use crate::lib::data::score::*;
 use crate::lib::components::ball::*;
-use crate::lib::score::*;
 
 pub fn app_root() -> Result<PathBuf, Error> {
     amethyst::utils::application_root_dir()

@@ -1,5 +1,5 @@
 use amethyst::ecs::*;
-use crate::lib::side::Side;
+use crate::lib::data::side::Side;
 
 pub const PADDLE_BLOCK: f32 = 4.0;
 pub const PADDLE_WIDTH: f32 = PADDLE_BLOCK;

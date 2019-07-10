@@ -1,9 +1,9 @@
 use amethyst::core::transform::Transform;
 use amethyst::ecs::prelude::*;
 use amethyst::ui::UiText;
+use crate::lib::data::arena::*;
+use crate::lib::data::score::*;
 use crate::lib::components::ball::*;
-use crate::lib::arena::*;
-use crate::lib::score::*;
 
 pub struct WinnerSystem;
 

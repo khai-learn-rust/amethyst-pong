@@ -1,9 +1,9 @@
 use amethyst::core::Transform;
 use amethyst::ecs::*;
 use amethyst::input::*;
-use crate::lib::arena::*;
+use crate::lib::data::arena::*;
+use crate::lib::data::side::*;
 use crate::lib::components::paddle::*;
-use crate::lib::side::*;
 
 pub struct PaddleSystem;
 
