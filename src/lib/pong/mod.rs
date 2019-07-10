@@ -2,7 +2,7 @@ use amethyst::prelude::*;
 use amethyst::renderer::*;
 use amethyst::assets::*;
 use amethyst::core::timing::Time;
-use super::fns::*;
+use crate::lib::fns::*;
 
 #[derive(Debug, Default)]
 pub struct Pong {

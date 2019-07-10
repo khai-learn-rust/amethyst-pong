@@ -1,10 +1,10 @@
 use amethyst::core::Transform;
 use amethyst::ecs::prelude::*;
-use super::super::utils::rect::*;
-use super::super::ball::*;
-use super::super::paddle::*;
-use super::super::arena::*;
-use super::super::side::*;
+use crate::lib::utils::rect::*;
+use crate::lib::ball::*;
+use crate::lib::paddle::*;
+use crate::lib::arena::*;
+use crate::lib::side::*;
 
 pub struct BounceSystem;
 

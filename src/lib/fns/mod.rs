@@ -5,11 +5,11 @@ use amethyst::prelude::*;
 use amethyst::renderer;
 use amethyst::assets;
 use amethyst::ui;
-use super::paddle::*;
-use super::arena::*;
-use super::side::*;
-use super::ball::*;
-use super::score::*;
+use crate::lib::paddle::*;
+use crate::lib::arena::*;
+use crate::lib::side::*;
+use crate::lib::ball::*;
+use crate::lib::score::*;
 
 pub fn app_root() -> Result<PathBuf, Error> {
     amethyst::utils::application_root_dir()
