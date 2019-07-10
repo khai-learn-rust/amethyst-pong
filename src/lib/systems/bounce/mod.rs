@@ -1,8 +1,8 @@
 use amethyst::core::Transform;
 use amethyst::ecs::prelude::*;
 use crate::lib::utils::rect::*;
-use crate::lib::ball::*;
-use crate::lib::paddle::*;
+use crate::lib::components::ball::*;
+use crate::lib::components::paddle::*;
 use crate::lib::arena::*;
 use crate::lib::side::*;
 

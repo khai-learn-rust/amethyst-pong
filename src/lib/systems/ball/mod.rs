@@ -1,7 +1,7 @@
 use amethyst::core::timing::Time;
 use amethyst::core::transform::Transform;
 use amethyst::ecs::*;
-use crate::lib::ball::*;
+use crate::lib::components::ball::*;
 
 pub struct MoveBallsSystem;
 

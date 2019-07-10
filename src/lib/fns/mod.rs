@@ -5,10 +5,10 @@ use amethyst::prelude::*;
 use amethyst::renderer;
 use amethyst::assets;
 use amethyst::ui;
-use crate::lib::paddle::*;
+use crate::lib::components::paddle::*;
 use crate::lib::arena::*;
 use crate::lib::side::*;
-use crate::lib::ball::*;
+use crate::lib::components::ball::*;
 use crate::lib::score::*;
 
 pub fn app_root() -> Result<PathBuf, Error> {

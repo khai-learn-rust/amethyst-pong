@@ -2,7 +2,7 @@ use amethyst::core::Transform;
 use amethyst::ecs::*;
 use amethyst::input::*;
 use crate::lib::arena::*;
-use crate::lib::paddle::*;
+use crate::lib::components::paddle::*;
 use crate::lib::side::*;
 
 pub struct PaddleSystem;

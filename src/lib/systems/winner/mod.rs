@@ -1,7 +1,7 @@
 use amethyst::core::transform::Transform;
 use amethyst::ecs::prelude::*;
 use amethyst::ui::UiText;
-use crate::lib::ball::*;
+use crate::lib::components::ball::*;
 use crate::lib::arena::*;
 use crate::lib::score::*;
 

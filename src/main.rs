@@ -8,7 +8,7 @@ use amethyst::core;
 use amethyst::input;
 use amethyst::ui;
 use renderer::sprite;
-use lib::pong::Pong;
+use lib::components::pong::Pong;
 use lib::graph::example_graph::ExampleGraph;
 use lib::systems;
 
